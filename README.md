@@ -19,26 +19,20 @@ A comprehensive, production-ready Hospital Management System (HMS) built with **
 
 ### ⚙️ Backend
 - **Framework**: Django 5 (Django REST Framework)
-- **Database**: PostgreSQL (Railway Managed)
+- **Database**: MongoDB Atlas (Cloud NoSQL)
 - **Deployment**: Railway (Monorepo setup)
 
 ---
 
-## 🚀 Railway Deployment Guide (Backend)
+## 🚀 MongoDB Atlas Deployment Guide (Backend)
 
-To deploy the backend on Railway:
+To deploy the backend with MongoDB Atlas:
 
-1.  **Connect Repo**: Link your GitHub repository to a new Railway project.
-2.  **Add Database**: Click "New" -> "Database" -> "Add PostgreSQL".
-3.  **Configure Backend**:
-    - Railway will automatically detect the `railway.json` and use the `backend` root directory.
-    - The `Procfile` handles the Gunicorn process.
-4.  **Environment Variables**:
-    - `DATABASE_URL`: Automatically linked by Railway if you add the Postgres service.
-    - `DJANGO_SECRET_KEY`: Your production secret key.
-    - `DJANGO_DEBUG`: `False`
-    - `CORS_ALLOWED_ORIGINS`: `https://nitinhospitalmanagementsystem.netlify.app`
-    - `ALLOWED_HOSTS`: `*.up.railway.app`
+1.  **Create Cluster**: Sign up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a free Shared Cluster.
+2.  **Get Connection String**: Go to "Database" -> "Connect" -> "Drivers" and copy the `SRV` connection string.
+3.  **Configure Railway**:
+    - Add `MONGODB_URI` environment variable with your connection string.
+    - Add `DB_NAME` = `nitin_hospital`.
 
 ---
 

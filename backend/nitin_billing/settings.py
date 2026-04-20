@@ -6,7 +6,8 @@ Production-ready settings for Medical Store Billing System
 import os
 from pathlib import Path
 from datetime import timedelta
-import dj_database_url
+from pathlib import Path
+from datetime import timedelta
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -73,25 +74,17 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'nitin_billing.wsgi.application'
+# Database - MongoDB Atlas for Production, SQLite for Local (unless MONGODB_URI exists)
+MONGODB_URI = os.environ.get('MONGODB_URI')
 
-# Database - SQLite for development, PostgreSQL/DATABASE_URL for production
-DATABASE_URL = os.environ.get('DATABASE_URL')
-DATABASE_ENGINE = os.environ.get('DB_ENGINE', 'sqlite3')
-
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-    }
-elif DATABASE_ENGINE == 'postgresql':
+if MONGODB_URI:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DB_NAME', 'nitin_billing'),
-            'USER': os.environ.get('DB_USER', 'postgres'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT', '5432'),
+            'ENGINE': 'django_mongodb_backend',
+            'NAME': os.environ.get('DB_NAME', 'nitin_hospital'),
+            'CLIENT': {
+                'host': MONGODB_URI,
+            }
         }
     }
 else:
