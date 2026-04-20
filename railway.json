@@ -5,7 +5,7 @@
     "watchPatterns": ["backend/**"]
   },
   "deploy": {
-    "startCommand": "gunicorn nitin_billing.wsgi:application",
+    "startCommand": "python manage.py migrate --noinput && gunicorn nitin_billing.wsgi:application",
     "restartPolicyType": "ON_FAILURE",
     "rootDirectory": "backend"
   }
