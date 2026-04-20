@@ -5,63 +5,44 @@ A comprehensive, production-ready Hospital Management System (HMS) built with **
 ---
 
 ## 🌐 Live Deployment
-**Live App**: [nitinhospitalmanagementsystem.netlify.app](https://nitinhospitalmanagementsystem.netlify.app)
+- **Frontend (Netlify)**: [nitinhospitalmanagementsystem.netlify.app](https://nitinhospitalmanagementsystem.netlify.app)
+- **Backend (Railway)**: *(Your Railway Service URL)*
 
 ---
 
 ## 🛠️ Detailed Tech Stack
 
 ### 🎨 Frontend
-- **Framework**: [React 19](https://react.dev/) (Vite 8 Build Tool)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) (Next-gen utility-first CSS)
-- **Components**: [Radix UI](https://www.radix-ui.com/) (Accessible headless primitives)
-- **State Management**: [Zustand](https://zustand-demo.pmnd.rs/) (Lightweight client state)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) (Declarative UI transitions)
-- **Routing**: [React Router 7](https://reactrouter.com/)
-- **Charts**: [Recharts](https://recharts.org/) (D3-based data visualization)
-- **API Client**: [Axios](https://axios-http.com/)
+- **Framework**: React 19 (Vite 8)
+- **Styling**: Tailwind CSS 4, Radix UI
+- **State/Animations**: Zustand, Framer Motion
 
 ### ⚙️ Backend
-- **Framework**: [Django 5](https://www.djangoproject.com/) (Python-based enterprise framework)
-- **API Engine**: [Django REST Framework (DRF)](https://www.django-rest-framework.org/)
-- **Authentication**: [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) (Stateless token-based auth)
-- **Database**: [PostgreSQL](https://www.postgresql.org/) (Production) / [SQLite](https://www.sqlite.org/) (Development)
-- **Reporting**: [ReportLab](https://www.reportlab.com/) (PDF Generation)
-- **Data Handling**: [Pandas](https://pandas.pydata.org/) & [Openpyxl](https://openpyxl.readthedocs.io/) (Excel import/export)
-- **Imaging**: [Pillow](https://python-pillow.org/)
+- **Framework**: Django 5 (Django REST Framework)
+- **Database**: PostgreSQL (Railway Managed)
+- **Deployment**: Railway (Monorepo setup)
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Railway Deployment Guide (Backend)
 
-### Prerequisites
-- **Node.js** (v18+)
-- **Python** (v3.10+)
-- **Docker** (Optional)
+To deploy the backend on Railway:
 
-### 1. Backend Setup
-```bash
-cd backend
-python -m venv venv
-# Windows: venv\Scripts\activate | Mac/Linux: source venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
-
-### 2. Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The app will be available at **http://localhost:5173**.
+1.  **Connect Repo**: Link your GitHub repository to a new Railway project.
+2.  **Add Database**: Click "New" -> "Database" -> "Add PostgreSQL".
+3.  **Configure Backend**:
+    - Railway will automatically detect the `railway.json` and use the `backend` root directory.
+    - The `Procfile` handles the Gunicorn process.
+4.  **Environment Variables**:
+    - `DATABASE_URL`: Automatically linked by Railway if you add the Postgres service.
+    - `DJANGO_SECRET_KEY`: Your production secret key.
+    - `DJANGO_DEBUG`: `False`
+    - `CORS_ALLOWED_ORIGINS`: `https://nitinhospitalmanagementsystem.netlify.app`
+    - `ALLOWED_HOSTS`: `*.up.railway.app`
 
 ---
 
 ## 🐳 Docker Deployment
-The project is containerized for easy deployment:
 ```bash
 docker-compose up --build
 ```
@@ -69,11 +50,10 @@ docker-compose up --build
 ---
 
 ## 📖 Key Features
-- **GST Invoicing**: Precise tax calculation (CGST/SGST) with PDF generation.
-- **Patient Management**: Full admission, ward tracking, and medical history.
-- **Inventory & Pharmacy**: Real-time stock alerts and expiry tracking.
-- **Lab & Blood Bank**: Test result management and blood availability tracking.
-- **Ambulance Tracking**: Dispatch system for emergency vehicles.
+- **GST Invoicing**: Precise tax calculation (CGST/SGST).
+- **Patient Management**: Full admission and history.
+- **Inventory & Pharmacy**: Real-time stock alerts.
+- **Lab & Blood Bank**: Tracking and diagnostics.
 
 ---
 
@@ -83,4 +63,4 @@ docker-compose up --build
 
 ---
 
-Built for 60FPS performance and high-tech healthcare management.
+Built for 60FPS performance and professional healthcare excellence.

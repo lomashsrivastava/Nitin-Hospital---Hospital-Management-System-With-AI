@@ -6,6 +6,7 @@ Production-ready settings for Medical Store Billing System
 import os
 from pathlib import Path
 from datetime import timedelta
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -73,10 +75,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nitin_billing.wsgi.application'
 
-# Database - SQLite for development, PostgreSQL for production
+# Database - SQLite for development, PostgreSQL/DATABASE_URL for production
+DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASE_ENGINE = os.environ.get('DB_ENGINE', 'sqlite3')
 
-if DATABASE_ENGINE == 'postgresql':
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    }
+elif DATABASE_ENGINE == 'postgresql':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
